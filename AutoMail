@@ -1,0 +1,1961 @@
+package Testttt;
+
+import javax.swing.JOptionPane;
+import java.awt.EventQueue;
+import javax.swing.JFrame;
+import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
+import javax.swing.SwingConstants;
+import javax.swing.JLabel;
+import javax.imageio.ImageIO;
+import javax.swing.ButtonGroup;
+import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import javax.swing.JPanel;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
+import java.awt.Font;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
+import javax.swing.UIManager;
+import java.awt.Color;
+import javax.swing.JCheckBox;
+import javax.swing.JRadioButton;
+import javax.swing.JTextArea;
+import javax.swing.JList;
+import javax.swing.JComboBox;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import javax.swing.JScrollPane;
+
+public class AutoMail {
+
+
+	static JTextArea textArea_5;
+	static String temp;
+	static String tamp;
+	static int startindex = 0;
+
+	// Swing
+	JFrame mainFrame;
+
+	// Panel_1
+	private JPanel selectEmailTypePanel;
+	private JRadioButton incidentMailRadioButton;
+	private JRadioButton serverUptadeMailRadioButton;
+	private JRadioButton maintenanceRadioButton;
+	private ButtonGroup buttonGroup;
+	//
+
+	// Panel_2
+	private JPanel selectTemplatePanel;
+	private JRadioButton incidentStartRadioButton;
+	private JRadioButton incidentUpdateRadioButton;
+	private JRadioButton incidentEndRadioButton;
+	private ButtonGroup buttonGroup_2;
+	private JRadioButton notificationGameProvidersRadioButton;
+	private JRadioButton notificationGrooveGameProvidersRadioButton;
+	private JRadioButton notificationPaymentProviderRadioButton;
+	private ButtonGroup buttonGroup_9;
+	//
+
+	// Buttons generate and send emails
+	private JButton generateEmailsButton;
+	private JButton sendTestEmailButton;
+	//
+
+	// Panel_3
+	private JPanel additionalRecipientsPanel;
+	private JCheckBox addRecipientcheckBox_1;
+	private JCheckBox addRecipientcheckBox_2;
+	private JCheckBox addRecipientcheckBox_3;
+	private JCheckBox addRecipientcheckBox_4;
+	//
+
+	// Panel_4
+	private JPanel selectBrandsPanel;
+	private ActionListener actionListenerButtonGroup_3;
+	private JRadioButton allRadioButton;
+	private JRadioButton SelectionRadioButton;
+	private ButtonGroup buttonGroup_3;
+	private JButton deselectAllButton;
+	private JButton selectAllButton;
+	private JButton invertSelectionButton;
+	
+	// Sub Panel_1
+	private JPanel selectBrandsBySubPanel;
+	private JRadioButton companyRadioButton;
+	private JRadioButton PhysicalFarmRadioButton;
+	private ButtonGroup buttonGroup_4;
+	//
+	private JButton selectGTGCompanyButton;
+	private JButton selectEquinoxCompanyButton;
+	private JButton selectAlphaCompanyButton;
+	private JButton selectTopiaCompanyButton;
+	private JButton selectGreenFeatherCompanyButton;
+	private JButton selectTallMountainCompanyButton;
+	private JButton selectGSTechnologyCompanyButton;
+	private JList<String> internalBrandslist;
+	private JScrollPane internalBrandsScrollPane;
+	//Sub Panel_2
+	private JPanel selectExternalBrandsByGPSubPanel;
+	private JButton deselectAllButton_2;
+	private JButton selectAllButton_2;
+	private JList<String> brandsByGPList;
+	private JScrollPane brandsByGPScrollPane;
+	//
+	
+	//Panel_5
+	private JPanel emailTemplatePanel;
+	private JLabel emailSubjectLabel;
+	private static JTextField emailSubjectTextField;
+	private JLabel helloEveryoneLabel;
+	static String[] recipientNames = {"Dear Casino Operator,", "Dear Groove Gaming Operator,"};
+	private JComboBox recipientComboBox;
+	private static JTextArea descriptiontextArea;
+	private JScrollPane descriptionScrollPane;
+	private JLabel incidentStartTimelabel;
+	private static JTextField dateTextField;
+	private JLabel affectedCasinosLabel;
+	private JLabel filledAutoLabel;
+	private JCheckBox affectedSystemsCheckBox;
+	private JTextArea affectedSystemsTextArea;
+	private JScrollPane affectedSystemsScrollPane;
+	private JCheckBox  timeSinceStartOfIncidentCheckBox;
+	private static JTextField timeSinceStartOfIncidentCheckBoxTextField;
+	private JCheckBox affectedFunctionalitiesCheckBox;
+	private JTextArea affectedFunctionalitiesTextArea;
+	private JScrollPane affectedFunctionalitiesScrollPane;
+	private JCheckBox  actionTakenSoFarCheckBox;
+	private JTextArea actionTakenSoFarTextArea;
+	private JScrollPane actionTakenSoFarScrollPane;
+	private JCheckBox  stillInvestigatingCheckBox;
+	private JCheckBox reasonCheckBox;
+	private JTextArea reasonTextArea;
+	private JScrollPane reasonScrollPane;
+	private JCheckBox ETACheckBox;
+	private JRadioButton ETARadioButton;
+	private JRadioButton ETARadioButton_2;
+	private JRadioButton ETARadioButton_3;
+	private JTextField ETATextField;
+	private ButtonGroup buttonGroup_5;
+	private JCheckBox summationCheckBox;
+	private JRadioButton summationRadioButton;
+	private JRadioButton summationRadioButton_2;
+	private JRadioButton summationRadioButton_3;
+	private JRadioButton summationRadioButton_4;
+	private JTextField summationTextField;
+	private ButtonGroup buttonGroup_6;
+	private JCheckBox workingStatusCheckBox;
+	private JRadioButton workingStatusRadioButton;
+	private JRadioButton workingStatusRadioButton_2;
+	private JRadioButton workingStatusRadioButton_3;
+	private JTextField workingStatusTextField;
+	private ButtonGroup buttonGroup_8;
+	private JCheckBox thanksCheckBox;
+	private JRadioButton thanksRadioButton;
+	private JRadioButton thanksRadioButton_2;
+	private JRadioButton thanksRadioButton_3;
+	private JTextField thanksTextField;
+	private ButtonGroup buttonGroup_7;
+	private JLabel bestRegardsLabel;
+	private JComboBox bestRegardsComboBox;
+	private JLabel skeletonImageLabel;
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	private Border border = new LineBorder(Color.white);;
+	private JButton btn_44;
+	private JButton btn_55;
+	
+	// Mail
+	static String subject;
+	static String body;
+	static SampleJavaMailCCAndBcc s;
+	private static String[] NAMES = null;
+	private static String[] USER_NAMES = null; // GMail user name (just the part before "@gmail.com")
+	private static String[] PASSWORDS = null;
+
+
+	static ReadExcelFile r;
+	static String[][] brands;
+	static String[][] exBrands;
+	static String[][] details;
+	// static ArrayList<String[]> listk = new ArrayList<String[]>();
+	static Set<String[]> listk = new HashSet<String[]>();
+	static Set<String[]> listk2 = new HashSet<String[]>();
+
+	static Integer start = 1;
+	static Integer end = null;
+
+	private JLabel lblOutOf;
+	private JLabel lblNewLabel;
+	private JLabel lblNewLabel_1;
+	private JScrollPane scrollPane_5;
+	private JScrollPane scrollPane_6;
+	private JRadioButton radioButton;
+	private JRadioButton radioButton_1;
+	
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					UIManager.setLookAndFeel("com.jtattoo.plaf.noire.NoireLookAndFeel");
+					AutoMail window = new AutoMail();
+					window.mainFrame.setVisible(true);
+					s = new SampleJavaMailCCAndBcc();
+					try {
+						// s.to.add("yoniamikam1@gmail.com");
+						// s.cc.add("yoniamikam1@gmail.com");
+						// s.bcc.add("yoniamikam1@gmail.com");
+					} catch (Exception ex) {
+						System.out.println("Could not send email....!");
+						ex.printStackTrace();
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	public AutoMail() throws IOException {
+		initialize();
+	}
+
+	private void initialize() throws IOException {
+		
+		r = new ReadExcelFile();
+		brands = r.yoni("C:\\Users\\Yehonatan.a\\Documents\\InternalBrands.xlsx");
+		exBrands = r.yoni("C:\\Users\\Yehonatan.a\\Documents\\ExternalBrands.xlsx");
+		details = r.yoni("C:\\Users\\Yehonatan.a\\Documents\\UserDetails.xlsx");
+
+		NAMES = new String[details.length];
+		USER_NAMES = new String[details.length];
+		PASSWORDS = new String[details.length];
+
+		for (int i = 0; i < details.length; i++) {
+			NAMES[i] = details[i][0];
+			USER_NAMES[i] = details[i][1];
+			PASSWORDS[i] = details[i][2];
+		}
+		
+		
+		mainFrame = new JFrame();
+		mainFrame.setIconImage(Toolkit.getDefaultToolkit().getImage(AutoMail.class.getResource("/Testttt/1xx.png")));
+		mainFrame.getContentPane().setBackground(Color.BLACK);
+		mainFrame.setBounds(100, 100, 1365, 1016);
+		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		mainFrame.setLocationRelativeTo(null);
+		mainFrame.getContentPane().setLayout(null);
+		mainFrame.setResizable(false);
+
+		// Panel_1
+		selectEmailTypePanel = new JPanel();
+		selectEmailTypePanel.setBackground(new Color(0, 0, 0));
+		selectEmailTypePanel.setBorder(new TitledBorder(new LineBorder(new Color(255, 204, 153)), "Select Email Type:",
+				TitledBorder.LEADING, TitledBorder.TOP, new Font("Gisha", Font.PLAIN, 13), new Color(204, 102, 0)));
+		selectEmailTypePanel.setBounds(10, 11, 273, 110);
+		mainFrame.getContentPane().add(selectEmailTypePanel);
+		selectEmailTypePanel.setLayout(null);
+
+		incidentMailRadioButton = new JRadioButton("Incident Mail");
+		incidentMailRadioButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				incidentStartRadioButton.setVisible(true);
+				incidentUpdateRadioButton.setVisible(true);
+				incidentEndRadioButton.setVisible(true);
+				notificationGameProvidersRadioButton.setVisible(false);
+				notificationGrooveGameProvidersRadioButton.setVisible(false);
+				notificationPaymentProviderRadioButton.setVisible(false);
+			}
+		});
+		incidentMailRadioButton.setFont(new Font("Gisha", Font.PLAIN, 12));
+		incidentMailRadioButton.setBackground(new Color(0, 0, 0));
+		incidentMailRadioButton.setForeground(new Color(255, 255, 255));
+		incidentMailRadioButton.setSelected(true);
+		incidentMailRadioButton.setBounds(6, 21, 109, 23);
+		selectEmailTypePanel.add(incidentMailRadioButton);
+
+		serverUptadeMailRadioButton = new JRadioButton("Server Update Mail");
+		serverUptadeMailRadioButton.setFont(new Font("Gisha", Font.PLAIN, 12));
+		serverUptadeMailRadioButton.setEnabled(false);
+		serverUptadeMailRadioButton.setBackground(new Color(0, 0, 0));
+		serverUptadeMailRadioButton.setForeground(new Color(255, 255, 255));
+		serverUptadeMailRadioButton.setBounds(6, 47, 145, 23);
+		selectEmailTypePanel.add(serverUptadeMailRadioButton);
+
+		maintenanceRadioButton = new JRadioButton("Maintenance Mail");
+		maintenanceRadioButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				incidentStartRadioButton.setVisible(false);
+				incidentUpdateRadioButton.setVisible(false);
+				incidentEndRadioButton.setVisible(false);
+				notificationGameProvidersRadioButton.setVisible(true);
+				notificationGrooveGameProvidersRadioButton.setVisible(true);
+				notificationPaymentProviderRadioButton.setVisible(true);
+			}
+		});
+		maintenanceRadioButton.setForeground(Color.WHITE);
+		maintenanceRadioButton.setFont(new Font("Gisha", Font.PLAIN, 12));
+		maintenanceRadioButton.setBackground(Color.BLACK);
+		maintenanceRadioButton.setBounds(6, 73, 145, 23);
+		selectEmailTypePanel.add(maintenanceRadioButton);
+		
+		buttonGroup = new ButtonGroup();
+		buttonGroup.add(incidentMailRadioButton);
+		buttonGroup.add(serverUptadeMailRadioButton);
+		buttonGroup.add(maintenanceRadioButton);
+	
+		//
+
+		// Panel_2
+		selectTemplatePanel = new JPanel();
+		selectTemplatePanel.setBackground(new Color(0, 0, 0));
+		selectTemplatePanel.setBorder(new TitledBorder(new LineBorder(new Color(255, 204, 153)), "Select Template:",
+									TitledBorder.LEADING, TitledBorder.TOP, new Font("Gisha", Font.PLAIN, 13), new Color(204, 102, 0)));
+		selectTemplatePanel.setBounds(10, 132, 273, 96);
+		mainFrame.getContentPane().add(selectTemplatePanel);
+		selectTemplatePanel.setLayout(null);
+
+		incidentStartRadioButton = new JRadioButton("Incident Start");
+		incidentStartRadioButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				emailSubjectTextField.setText("");
+				descriptiontextArea.setText("Description...");	
+				reasonTextArea.setText("");
+				ETATextField.setText("");
+				thanksTextField.setText("");
+				affectedSystemsCheckBox.setVisible(true);
+				affectedSystemsTextArea.setVisible(true);
+				affectedSystemsScrollPane.setVisible(true);
+				affectedFunctionalitiesCheckBox.setVisible(true);
+				affectedFunctionalitiesTextArea.setVisible(true);
+				affectedFunctionalitiesScrollPane.setVisible(true);
+				timeSinceStartOfIncidentCheckBox.setVisible(false);
+				timeSinceStartOfIncidentCheckBoxTextField.setVisible(false);
+				actionTakenSoFarCheckBox.setVisible(false);
+				actionTakenSoFarTextArea.setVisible(false);
+				actionTakenSoFarScrollPane.setVisible(false);
+				stillInvestigatingCheckBox.setVisible(false);
+				summationCheckBox.setVisible(true);
+				summationRadioButton.setVisible(true);
+				summationRadioButton_2.setVisible(true);
+				summationRadioButton_3.setVisible(true);
+				summationRadioButton_4.setVisible(true);
+				summationTextField.setVisible(true);
+				workingStatusCheckBox.setVisible(false);
+				workingStatusRadioButton.setVisible(false);
+				workingStatusRadioButton_2.setVisible(false);
+				workingStatusRadioButton_3.setVisible(false);
+				workingStatusTextField.setVisible(false);
+				reasonCheckBox.setBounds(10, 516, 89, 23);
+				reasonTextArea.setBounds(191, 515, 565, 57);
+				reasonScrollPane.setBounds(191, 515, 565, 57);
+				ETACheckBox.setBounds(10, 595, 63, 23);
+				ETARadioButton.setBounds(191, 595, 390, 23);
+				ETARadioButton_2.setBounds(191, 621, 390, 23);
+				ETARadioButton_3.setBounds(191, 647, 75, 23);
+				ETATextField.setBounds(272, 651, 482, 20);
+				thanksCheckBox.setBounds(10, 842, 97, 23);
+				thanksRadioButton.setBounds(191, 842, 271, 23);
+				thanksRadioButton_2.setBounds(191, 868, 471, 23);
+				thanksRadioButton_3.setBounds(191, 894, 75, 23);
+				thanksTextField.setBounds(268, 895, 486, 20);
+				thanksRadioButton.setText("Thank you for your patience.");
+				thanksRadioButton_2.setText("We apologize for any incovenience and appreciate your understanding.");
+			}
+		});
+		incidentStartRadioButton.setFont(new Font("Gisha", Font.PLAIN, 12));
+		incidentStartRadioButton.setBackground(new Color(0, 0, 0));
+		incidentStartRadioButton.setForeground(new Color(255, 255, 255));
+		incidentStartRadioButton.setBounds(6, 17, 132, 23);
+		incidentStartRadioButton.setSelected(true);
+		selectTemplatePanel.add(incidentStartRadioButton);
+
+		incidentUpdateRadioButton = new JRadioButton("Incident Update");
+		incidentUpdateRadioButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				emailSubjectTextField.setText("");
+				descriptiontextArea.setText("Description of update / progress:");	
+				reasonTextArea.setText("");
+				ETATextField.setText("");
+				thanksTextField.setText("");
+				affectedSystemsCheckBox.setVisible(false);
+				affectedSystemsTextArea.setVisible(false);
+				affectedSystemsScrollPane.setVisible(false);
+				affectedFunctionalitiesCheckBox.setVisible(false);
+				affectedFunctionalitiesTextArea.setVisible(false);
+				affectedFunctionalitiesScrollPane.setVisible(false);
+				timeSinceStartOfIncidentCheckBox.setVisible(true);
+				timeSinceStartOfIncidentCheckBoxTextField.setVisible(true);
+				actionTakenSoFarCheckBox.setVisible(true);
+				actionTakenSoFarTextArea.setVisible(true);
+				actionTakenSoFarScrollPane.setVisible(true);
+				stillInvestigatingCheckBox.setVisible(true);
+				summationCheckBox.setVisible(false);
+				summationRadioButton.setVisible(false);
+				summationRadioButton_2.setVisible(false);
+				summationRadioButton_3.setVisible(false);
+				summationRadioButton_4.setVisible(false);
+				summationTextField.setVisible(false);
+				workingStatusCheckBox.setVisible(true);
+				workingStatusRadioButton.setVisible(true);
+				workingStatusRadioButton_2.setVisible(true);
+				workingStatusRadioButton_3.setVisible(true);
+				workingStatusTextField.setVisible(true);
+				reasonCheckBox.setBounds(10, 381, 89, 23);
+				reasonTextArea.setBounds(208, 381, 546, 54);
+				reasonScrollPane.setBounds(208, 381, 546, 54);
+				ETACheckBox.setBounds(10, 580, 63, 23);
+				ETARadioButton.setBounds(191, 580, 390, 23); 
+				ETARadioButton_2.setBounds(191, 606, 390, 23);
+				ETARadioButton_3.setBounds(191, 632, 75, 23);
+				ETATextField.setBounds(272, 632, 482, 20);
+				thanksCheckBox.setBounds(10, 777, 97, 23);
+				thanksRadioButton.setBounds(191, 777, 271, 23);
+				thanksRadioButton_2.setBounds(191, 803, 471, 23);
+				thanksRadioButton_3.setBounds(191, 829, 75, 23);
+				thanksTextField.setBounds(268, 829, 486, 20);
+				thanksRadioButton.setText("And again, thank you for your patience.");
+				thanksRadioButton_2.setText("And again, we apologize for any incovenience and appreciate your understanding.");
+			}
+		});
+		incidentUpdateRadioButton.setFont(new Font("Gisha", Font.PLAIN, 12));
+		incidentUpdateRadioButton.setBackground(new Color(0, 0, 0));
+		incidentUpdateRadioButton.setForeground(new Color(255, 255, 255));
+		incidentUpdateRadioButton.setBounds(6, 43, 132, 23);
+		selectTemplatePanel.add(incidentUpdateRadioButton);
+
+		incidentEndRadioButton = new JRadioButton("Incident End");
+		incidentEndRadioButton.setEnabled(false);
+		incidentEndRadioButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) { 
+				descriptiontextArea.setText("Description (something is now up / working / functioning again)");	
+			}
+		});
+		incidentEndRadioButton.setFont(new Font("Gisha", Font.PLAIN, 12));
+		incidentEndRadioButton.setBackground(new Color(0, 0, 0));
+		incidentEndRadioButton.setForeground(new Color(255, 255, 255));
+		incidentEndRadioButton.setBounds(6, 69, 132, 23);
+		selectTemplatePanel.add(incidentEndRadioButton);
+
+		buttonGroup_2 = new ButtonGroup();
+		buttonGroup_2.add(incidentStartRadioButton);
+		buttonGroup_2.add(incidentUpdateRadioButton);
+		buttonGroup_2.add(incidentEndRadioButton);
+		
+		notificationGameProvidersRadioButton = new JRadioButton("Notification from our GP");
+		notificationGameProvidersRadioButton.setVisible(false);
+		notificationGameProvidersRadioButton.setSelected(true);
+		notificationGameProvidersRadioButton.setForeground(Color.WHITE);
+		notificationGameProvidersRadioButton.setFont(new Font("Gisha", Font.PLAIN, 12));
+		notificationGameProvidersRadioButton.setBackground(Color.BLACK);
+		notificationGameProvidersRadioButton.setBounds(6, 18, 240, 23);
+		selectTemplatePanel.add(notificationGameProvidersRadioButton);
+		
+		notificationGrooveGameProvidersRadioButton = new JRadioButton("Notification from our Groove GP");
+		notificationGrooveGameProvidersRadioButton.setVisible(false);
+		notificationGrooveGameProvidersRadioButton.setForeground(Color.WHITE);
+		notificationGrooveGameProvidersRadioButton.setFont(new Font("Gisha", Font.PLAIN, 12));
+		notificationGrooveGameProvidersRadioButton.setBackground(Color.BLACK);
+		notificationGrooveGameProvidersRadioButton.setBounds(6, 43, 240, 23);
+		selectTemplatePanel.add(notificationGrooveGameProvidersRadioButton);
+		
+		notificationPaymentProviderRadioButton = new JRadioButton("Notification from our Payment Provider");
+		notificationPaymentProviderRadioButton.setVisible(false);
+		notificationPaymentProviderRadioButton.setForeground(Color.WHITE);
+		notificationPaymentProviderRadioButton.setFont(new Font("Gisha", Font.PLAIN, 12));
+		notificationPaymentProviderRadioButton.setBackground(Color.BLACK);
+		notificationPaymentProviderRadioButton.setBounds(6, 69, 240, 23);
+		selectTemplatePanel.add(notificationPaymentProviderRadioButton);
+		
+		buttonGroup_9 = new ButtonGroup();
+		buttonGroup_9.add(notificationGameProvidersRadioButton);
+		buttonGroup_9.add(notificationGrooveGameProvidersRadioButton);
+		buttonGroup_9.add(notificationPaymentProviderRadioButton);
+		
+		//
+
+		// Buttons generate and send emails
+		generateEmailsButton = new JButton("Generate E-mails...");
+		generateEmailsButton.setIcon(new ImageIcon(AutoMail.class.getResource("/Testttt/55.png")));
+		generateEmailsButton.setForeground(Color.WHITE);
+		generateEmailsButton.setFont(new Font("Gisha", Font.BOLD, 13));
+		generateEmailsButton.setHorizontalTextPosition(SwingConstants.CENTER);
+		generateEmailsButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				boolean DescriptionEmpty = descriptiontextArea.getText().trim().equals("") || descriptiontextArea.getText().isEmpty()
+						|| descriptiontextArea.getText().equals("Description...");
+				boolean subjectEmpty = emailSubjectTextField.getText().trim().equals("") || emailSubjectTextField.getText().isEmpty();
+				boolean noSelect = internalBrandslist.isSelectionEmpty();
+				if (!(DescriptionEmpty || subjectEmpty
+						|| (noSelect && !allRadioButton.isSelected() && listk2.isEmpty()))) {
+					createFrame();
+				} else {
+					String temp;
+					if (subjectEmpty && DescriptionEmpty)
+						temp = "Subject and Description fields can't be empty";
+					else if (subjectEmpty) {
+						temp = "Subject field can't be an empty";
+					} else if (DescriptionEmpty) {
+						temp = "Description field can't be empty";
+					} else {
+						temp = "you must select at least one brand from the list";
+					}
+					JOptionPane.showMessageDialog(null, temp, "InfoBox: " + "2", JOptionPane.INFORMATION_MESSAGE);
+				}
+			}
+		});
+		generateEmailsButton.setBounds(10, 239, 273, 23);
+		mainFrame.getContentPane().add(generateEmailsButton);
+
+		sendTestEmailButton = new JButton("Send Test E-mail");
+		sendTestEmailButton.setEnabled(false);
+		sendTestEmailButton.setIcon(new ImageIcon(AutoMail.class.getResource("/Testttt/55.png")));
+		sendTestEmailButton.setHorizontalTextPosition(SwingConstants.CENTER);
+		sendTestEmailButton.setForeground(Color.WHITE);
+		sendTestEmailButton.setFont(new Font("Gisha", Font.BOLD, 13));
+		sendTestEmailButton.setBounds(10, 273, 273, 23);
+		mainFrame.getContentPane().add(sendTestEmailButton);
+		//
+
+		// Panel_3
+		additionalRecipientsPanel = new JPanel();
+		additionalRecipientsPanel.setBackground(Color.BLACK);
+		additionalRecipientsPanel.setBorder(new TitledBorder(new LineBorder(new Color(255, 204, 153)),
+				"Additional Recipients", TitledBorder.LEADING, TitledBorder.TOP, new Font("Gisha", Font.PLAIN, 13), new Color(204, 102, 0)));
+		additionalRecipientsPanel.setBounds(10, 307, 273, 124);
+		mainFrame.getContentPane().add(additionalRecipientsPanel);
+		additionalRecipientsPanel.setLayout(null);
+
+		addRecipientcheckBox_1 = new JCheckBox("Add technical support's email to CC list.");
+		addRecipientcheckBox_1.setFont(new Font("Gisha", Font.PLAIN, 12));
+		addRecipientcheckBox_1.setForeground(new Color(255, 255, 255));
+		addRecipientcheckBox_1.setBackground(new Color(0, 0, 0));
+		addRecipientcheckBox_1.setBounds(6, 17, 261, 23);
+		additionalRecipientsPanel.add(addRecipientcheckBox_1);
+		addRecipientcheckBox_1.setSelected(true);
+
+		addRecipientcheckBox_2 = new JCheckBox("Add CTO's email to BCC list.");
+		addRecipientcheckBox_2.setFont(new Font("Gisha", Font.PLAIN, 12));
+		addRecipientcheckBox_2.setBackground(new Color(0, 0, 0));
+		addRecipientcheckBox_2.setForeground(new Color(255, 255, 255));
+		addRecipientcheckBox_2.setSelected(true);
+		addRecipientcheckBox_2.setBounds(6, 43, 261, 23);
+		additionalRecipientsPanel.add(addRecipientcheckBox_2);
+
+		addRecipientcheckBox_3 = new JCheckBox("Add Back-Office's email to BCC list.");
+		addRecipientcheckBox_3.setFont(new Font("Gisha", Font.PLAIN, 12));
+		addRecipientcheckBox_3.setEnabled(false);
+		addRecipientcheckBox_3.setBackground(new Color(0, 0, 0));
+		addRecipientcheckBox_3.setForeground(new Color(255, 255, 255));
+		addRecipientcheckBox_3.setBounds(6, 69, 261, 23);
+		additionalRecipientsPanel.add(addRecipientcheckBox_3);
+
+		addRecipientcheckBox_4 = new JCheckBox("Add CFO's (Gidi Bachar) email to BCC list.");
+		addRecipientcheckBox_4.setFont(new Font("Gisha", Font.PLAIN, 12));
+		addRecipientcheckBox_4.setEnabled(false);
+		addRecipientcheckBox_4.setBackground(new Color(0, 0, 0));
+		addRecipientcheckBox_4.setForeground(new Color(255, 255, 255));
+		addRecipientcheckBox_4.setBounds(6, 95, 261, 23);
+		additionalRecipientsPanel.add(addRecipientcheckBox_4);
+		//
+
+		// Panel_4
+		selectBrandsPanel = new JPanel();
+		selectBrandsPanel.setBackground(Color.BLACK);
+		selectBrandsPanel.setBorder(new TitledBorder(new LineBorder(new Color(255, 204, 153)), "Select Brand(s):",
+				TitledBorder.LEADING, TitledBorder.TOP, new Font("Gisha", Font.PLAIN, 13), (new Color (204, 102, 0))));
+		selectBrandsPanel.setBounds(293, 11, 279, 963);
+		mainFrame.getContentPane().add(selectBrandsPanel);
+		selectBrandsPanel.setLayout(null);
+		
+		actionListenerButtonGroup_3 = new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JRadioButton button = (JRadioButton) e.getSource();
+				if (button.getText().equals("ALL (!!!) (Send 1 mail!)")) {
+					deselectAllButton.setEnabled(false);
+					selectAllButton.setEnabled(false);
+					invertSelectionButton.setEnabled(false);
+					companyRadioButton.setEnabled(false);
+					PhysicalFarmRadioButton.setEnabled(false);
+					selectGTGCompanyButton.setEnabled(false);
+					selectEquinoxCompanyButton.setEnabled(false);
+					selectAlphaCompanyButton.setEnabled(false);
+					selectTopiaCompanyButton.setEnabled(false);
+					selectGreenFeatherCompanyButton.setEnabled(false);
+					selectTallMountainCompanyButton.setEnabled(false);
+					selectGSTechnologyCompanyButton.setEnabled(false);
+					internalBrandslist.setEnabled(false);
+					listk.clear();
+					for (int i = 0; i < brands.length; i++) {
+						listk.add(brands[i]);
+					}
+
+					System.out.println("ALL (!!!) (Send 1 mail!)");
+					for (String[] array : listk) {
+						for (String s : array) {
+							System.out.print(s + " ");
+						}
+						System.out.println();
+					}
+
+				} else {
+					deselectAllButton.setEnabled(true);
+					selectAllButton.setEnabled(true);
+					invertSelectionButton.setEnabled(true);
+					companyRadioButton.setEnabled(true);
+					// PhysicalFarmRadioButton.setEnabled(true);
+					selectGTGCompanyButton.setEnabled(true);
+					selectEquinoxCompanyButton.setEnabled(true);
+					selectAlphaCompanyButton.setEnabled(true);
+					selectTopiaCompanyButton.setEnabled(true);
+					selectGreenFeatherCompanyButton.setEnabled(true);
+					selectTallMountainCompanyButton.setEnabled(true);
+					selectGSTechnologyCompanyButton.setEnabled(true);
+					internalBrandslist.setEnabled(true);
+					listk.clear();
+
+					System.out.println("Selection:");
+					for (String[] array : listk) {
+						for (String s : array) {
+							System.out.print(s + " ");
+						}
+						System.out.println();
+					}
+				}
+			}
+		};
+		
+		allRadioButton = new JRadioButton("ALL (!!!) (Send 1 mail!)");
+		allRadioButton.setForeground(Color.WHITE);
+		allRadioButton.setBackground(Color.BLACK);
+		allRadioButton.setFont(new Font("Gisha", Font.BOLD, 12));
+		allRadioButton.addActionListener(actionListenerButtonGroup_3);
+		allRadioButton.setBounds(6, 25, 178, 23);
+		selectBrandsPanel.add(allRadioButton);
+
+		SelectionRadioButton = new JRadioButton("Selection:");
+		SelectionRadioButton.setFont(new Font("Gisha", Font.PLAIN, 12));
+		SelectionRadioButton.setBackground(Color.BLACK);
+		SelectionRadioButton.setForeground(Color.WHITE);
+		SelectionRadioButton.addActionListener(actionListenerButtonGroup_3);
+		SelectionRadioButton.setSelected(true);
+		SelectionRadioButton.setBounds(6, 51, 109, 23);
+		selectBrandsPanel.add(SelectionRadioButton);
+
+		buttonGroup_3 = new ButtonGroup();
+		buttonGroup_3.add(allRadioButton);
+		buttonGroup_3.add(SelectionRadioButton);	
+		
+		deselectAllButton = new JButton("Deselect ALL");
+		deselectAllButton.setForeground(Color.WHITE);
+		deselectAllButton.setFont(new Font("Gisha", Font.BOLD, 13));
+		deselectAllButton.setIcon(new ImageIcon(AutoMail.class.getResource("/Testttt/1234.png")));
+		deselectAllButton.setHorizontalTextPosition(SwingConstants.CENTER);
+		deselectAllButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				internalBrandslist.clearSelection();
+				listk.clear();
+				System.out.println("Deselect ALL");
+				for (String[] array : listk) {
+					for (String s : array) {
+						System.out.print(s + " ");
+					}
+					System.out.println();
+				}
+			}
+		});
+		deselectAllButton.setBounds(13, 81, 253, 23);
+		selectBrandsPanel.add(deselectAllButton);
+
+		selectAllButton = new JButton("Select ALL");
+		selectAllButton.setForeground(Color.WHITE);
+		selectAllButton.setFont(new Font("Gisha", Font.BOLD, 13));
+		selectAllButton.setIcon(new ImageIcon(AutoMail.class.getResource("/Testttt/1234.png")));
+		selectAllButton.setHorizontalTextPosition(SwingConstants.CENTER);
+		selectAllButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				internalBrandslist.setSelectionInterval(0, internalBrandslist.getModel().getSize() - 1);
+				for (int i = 0; i < brands.length; i++) {
+					listk.add(brands[i]);
+				}
+
+				System.out.println("Select ALL");
+				for (String[] array : listk) {
+					for (String s : array) {
+						System.out.print(s + " ");
+					}
+					System.out.println();
+				}
+			}
+		});
+		selectAllButton.setBounds(13, 107, 253, 23);
+		selectBrandsPanel.add(selectAllButton);
+
+		invertSelectionButton = new JButton("Invert Selection");
+		invertSelectionButton.setFont(new Font("Gisha", Font.BOLD, 13));
+		invertSelectionButton.setForeground(Color.WHITE);
+		invertSelectionButton.setIcon(new ImageIcon(AutoMail.class.getResource("/Testttt/1234.png")));
+		invertSelectionButton.setHorizontalTextPosition(SwingConstants.CENTER);
+		invertSelectionButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				for (int i = 0; i < internalBrandslist.getModel().getSize(); i++) {
+					if (internalBrandslist.isSelectedIndex(i)) {
+						internalBrandslist.removeSelectionInterval(i, i);
+					} else {
+						internalBrandslist.addSelectionInterval(i, i);
+					}
+				}
+
+				listk.clear();
+
+				for (int i = 0; i < internalBrandslist.getModel().getSize(); i++) {
+					if (internalBrandslist.isSelectedIndex(i)) {
+						listk.add(brands[i]);
+					}
+				}
+
+				System.out.println("Invert Selection");
+				for (String[] array : listk) {
+					for (String s : array) {
+						System.out.print(s + " ");
+					}
+					System.out.println();
+				}
+
+			}
+		});
+		invertSelectionButton.setBounds(13, 133, 253, 23);
+		selectBrandsPanel.add(invertSelectionButton);
+		
+		//Sub panel_1
+		selectBrandsBySubPanel = new JPanel();
+		selectBrandsBySubPanel.setBackground(Color.BLACK);
+		selectBrandsBySubPanel.setBorder(new TitledBorder(new LineBorder(new Color(255, 178, 102)), "Select Brands By:",
+				TitledBorder.LEADING, TitledBorder.TOP, new Font("Gisha", Font.PLAIN, 13), (new Color(204, 102, 0))));
+		selectBrandsBySubPanel.setBounds(13, 164, 253, 76);
+		selectBrandsPanel.add(selectBrandsBySubPanel);
+		selectBrandsBySubPanel.setLayout(null);
+
+		companyRadioButton = new JRadioButton("COMPANY (MicroService)");
+		companyRadioButton.setFont(new Font("Gisha", Font.PLAIN, 12));
+		companyRadioButton.setBackground(Color.BLACK);
+		companyRadioButton.setForeground(Color.WHITE);
+		companyRadioButton.setSelected(true);
+		companyRadioButton.setBounds(6, 21, 203, 23);
+		selectBrandsBySubPanel.add(companyRadioButton);
+
+		PhysicalFarmRadioButton = new JRadioButton("Physical FARM");
+		PhysicalFarmRadioButton.setFont(new Font("Gisha", Font.PLAIN, 12));
+		PhysicalFarmRadioButton.setEnabled(false);
+		PhysicalFarmRadioButton.setBackground(Color.BLACK);
+		PhysicalFarmRadioButton.setForeground(Color.WHITE);
+		PhysicalFarmRadioButton.setBounds(6, 47, 171, 23);
+		selectBrandsBySubPanel.add(PhysicalFarmRadioButton);
+
+		buttonGroup_4 = new ButtonGroup();
+		buttonGroup_4.add(companyRadioButton);
+		buttonGroup_4.add(PhysicalFarmRadioButton);
+		//
+		selectGTGCompanyButton = new JButton("Select GTG Company");
+		selectGTGCompanyButton.setIcon(new ImageIcon(AutoMail.class.getResource("/Testttt/1234.png")));
+		selectGTGCompanyButton.setForeground(Color.WHITE);
+		selectGTGCompanyButton.setFont(new Font("Gisha", Font.BOLD, 13));
+		selectGTGCompanyButton.setHorizontalTextPosition(SwingConstants.CENTER);
+		selectGTGCompanyButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				for (int i = 0; i < brands.length; i++) {
+					if (brands[i][2] != null && brands[i][2].equals("GTG")) {
+						System.out.println("dsfsdf");
+						listk.add(brands[i]);
+						internalBrandslist.addSelectionInterval(i, i);
+					}
+				}
+
+				System.out.println("Select GTG Company");
+				for (String[] array : listk) {
+					for (String s : array) {
+						System.out.print(s + " ");
+					}
+					System.out.println();
+				}
+			}
+		});
+		selectGTGCompanyButton.setBounds(13, 251, 253, 23);
+		selectBrandsPanel.add(selectGTGCompanyButton);
+
+		selectEquinoxCompanyButton = new JButton("Select Equinox Company");
+		selectEquinoxCompanyButton.setIcon(new ImageIcon(AutoMail.class.getResource("/Testttt/1234.png")));
+		selectEquinoxCompanyButton.setForeground(Color.WHITE);
+		selectEquinoxCompanyButton.setFont(new Font("Gisha", Font.BOLD, 13));
+		selectEquinoxCompanyButton.setHorizontalTextPosition(SwingConstants.CENTER);
+		selectEquinoxCompanyButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				for (int i = 0; i < brands.length; i++) {
+					if (brands[i][2] != null && brands[i][2].equals("Equinox")) {
+						listk.add(brands[i]);
+						internalBrandslist.addSelectionInterval(i, i);
+					}
+				}
+				System.out.println("Select Equinox Company");
+				for (String[] array : listk) {
+					for (String s : array) {
+						System.out.print(s + " ");
+					}
+					System.out.println();
+				}
+			}
+		});
+		selectEquinoxCompanyButton.setBounds(13, 277, 253, 23);
+		selectBrandsPanel.add(selectEquinoxCompanyButton);
+
+		selectAlphaCompanyButton = new JButton("Select Alpha Company");
+		selectAlphaCompanyButton.setIcon(new ImageIcon(AutoMail.class.getResource("/Testttt/1234.png")));
+		selectAlphaCompanyButton.setForeground(Color.WHITE);
+		selectAlphaCompanyButton.setFont(new Font("Gisha", Font.BOLD, 13));
+		selectAlphaCompanyButton.setHorizontalTextPosition(SwingConstants.CENTER);
+		selectAlphaCompanyButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				for (int i = 0; i < brands.length; i++) {
+					if (brands[i][2] != null && brands[i][2].equals("Alpha")) {
+						listk.add(brands[i]);
+						internalBrandslist.addSelectionInterval(i, i);
+					}
+				}
+				System.out.println("Select Alpha Company");
+				for (String[] array : listk) {
+					for (String s : array) {
+						System.out.print(s + " ");
+					}
+					System.out.println();
+				}
+			}
+
+		});
+		selectAlphaCompanyButton.setBounds(13, 303, 253, 23);
+		selectBrandsPanel.add(selectAlphaCompanyButton);
+
+		selectTopiaCompanyButton = new JButton("Select Topia Company");
+		selectTopiaCompanyButton.setIcon(new ImageIcon(AutoMail.class.getResource("/Testttt/1234.png")));
+		selectTopiaCompanyButton.setForeground(Color.WHITE);
+		selectTopiaCompanyButton.setFont(new Font("Gisha", Font.BOLD, 13));
+		selectTopiaCompanyButton.setHorizontalTextPosition(SwingConstants.CENTER);
+		selectTopiaCompanyButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				for (int i = 0; i < brands.length; i++) {
+					if (brands[i][2] != null && brands[i][2].equals("Topia")) {
+						listk.add(brands[i]);
+						internalBrandslist.addSelectionInterval(i, i);
+					}
+				}
+				System.out.println("Select Topia Company");
+				for (String[] array : listk) {
+					for (String s : array) {
+						System.out.print(s + " ");
+					}
+					System.out.println();
+				}
+
+			}
+		});
+		selectTopiaCompanyButton.setBounds(13, 329, 253, 23);
+		selectBrandsPanel.add(selectTopiaCompanyButton);
+
+		selectGreenFeatherCompanyButton = new JButton("Select Green Feather Company");
+		selectGreenFeatherCompanyButton.setIcon(new ImageIcon(AutoMail.class.getResource("/Testttt/1234.png")));
+		selectGreenFeatherCompanyButton.setHorizontalTextPosition(SwingConstants.CENTER);
+		selectGreenFeatherCompanyButton.setForeground(Color.WHITE);
+		selectGreenFeatherCompanyButton.setFont(new Font("Gisha", Font.BOLD, 13));
+		selectGreenFeatherCompanyButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+				for (int i = 0; i < brands.length; i++) {
+					if (brands[i][2] != null && brands[i][2].equals("Green Feather")) {
+						listk.add(brands[i]);
+						internalBrandslist.addSelectionInterval(i, i);
+					}
+				}
+				System.out.println("Select Green Feather Company");
+				for (String[] array : listk) {
+					for (String s : array) {
+						System.out.print(s + " ");
+					}
+					System.out.println();
+				}
+
+			}
+		});
+		selectGreenFeatherCompanyButton.setBounds(13, 355, 253, 23);
+		selectBrandsPanel.add(selectGreenFeatherCompanyButton);
+
+		selectTallMountainCompanyButton = new JButton("Select Tall Mountain Company");
+		selectTallMountainCompanyButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				for (int i = 0; i < brands.length; i++) {
+					if (brands[i][2] != null && brands[i][2].equals("Tall Mountain")) {
+						listk.add(brands[i]);
+						internalBrandslist.addSelectionInterval(i, i);
+					}
+				}
+				System.out.println("Select Tall Mountain Company");
+				for (String[] array : listk) {
+					for (String s : array) {
+						System.out.print(s + " ");
+					}
+					System.out.println();
+				}
+
+			}
+		});
+		selectTallMountainCompanyButton.setIcon(new ImageIcon(AutoMail.class.getResource("/Testttt/1234.png")));
+		selectTallMountainCompanyButton.setHorizontalTextPosition(SwingConstants.CENTER);
+		selectTallMountainCompanyButton.setForeground(Color.WHITE);
+		selectTallMountainCompanyButton.setFont(new Font("Gisha", Font.BOLD, 13));
+		selectTallMountainCompanyButton.setBounds(13, 381, 253, 23);
+		selectBrandsPanel.add(selectTallMountainCompanyButton);
+		
+		selectGSTechnologyCompanyButton = new JButton("Select GS Technology Company");
+		selectGSTechnologyCompanyButton.setIcon(new ImageIcon(AutoMail.class.getResource("/Testttt/1234.png")));
+		selectGSTechnologyCompanyButton.setForeground(Color.WHITE);
+		selectGSTechnologyCompanyButton.setFont(new Font("Gisha", Font.BOLD, 13));
+		selectGSTechnologyCompanyButton.setHorizontalTextPosition(SwingConstants.CENTER);
+		selectGSTechnologyCompanyButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				for (int i = 0; i < brands.length; i++) {
+					if (brands[i][2] != null && brands[i][2].equals("GS Technology")) {
+						listk.add(brands[i]);
+						internalBrandslist.addSelectionInterval(i, i);
+					}
+				}
+				System.out.println("Select GS Technology Company");
+				for (String[] array : listk) {
+					for (String s : array) {
+						System.out.print(s + " ");
+					}
+					System.out.println();
+				}
+			}
+		});
+		selectGSTechnologyCompanyButton.setBounds(13, 407, 253, 23);
+		selectBrandsPanel.add(selectGSTechnologyCompanyButton);
+		
+		DefaultListModel<String> brandsNames = new DefaultListModel<String>();
+		for (int i = 0; i < brands.length; i++) {
+			brandsNames.addElement(brands[i][0]);
+		}
+		
+		internalBrandslist = new JList<String>(brandsNames);
+		internalBrandslist.setFont(new Font("Gisha", Font.PLAIN, 13));
+		internalBrandslist.setSelectedIndex(0);
+		internalBrandslist.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				listk.clear();
+
+				for (int i = 0; i < internalBrandslist.getModel().getSize(); i++) {
+					if (internalBrandslist.isSelectedIndex(i)) {
+						listk.add(brands[i]);
+					}
+				}
+
+				System.out.println("menu");
+				for (String[] array : listk) {
+					for (String s : array) {
+						System.out.print(s + " ");
+					}
+					System.out.println();
+				}
+			}
+		});
+		internalBrandslist.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+		internalBrandslist.setVisibleRowCount(3);
+
+		internalBrandsScrollPane = new JScrollPane();
+		internalBrandsScrollPane.setBounds(13, 435, 253, 339);
+		internalBrandsScrollPane.setViewportView(internalBrandslist);
+		selectBrandsPanel.add(internalBrandsScrollPane);
+		//
+		//Sun Panel_2
+		selectExternalBrandsByGPSubPanel = new JPanel();
+		selectExternalBrandsByGPSubPanel.setBorder(new TitledBorder(new LineBorder(new Color(255, 178, 102)), "Select External Brands By GP:",
+				TitledBorder.LEADING, TitledBorder.TOP, new Font("Gisha", Font.PLAIN, 13), (new Color(204, 102, 0))));
+		selectExternalBrandsByGPSubPanel.setBackground(Color.BLACK);
+		selectExternalBrandsByGPSubPanel.setBounds(10, 780, 256, 172);
+		selectBrandsPanel.add(selectExternalBrandsByGPSubPanel);
+		selectExternalBrandsByGPSubPanel.setLayout(null);
+
+		deselectAllButton_2 = new JButton("Deselect All");
+		deselectAllButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				brandsByGPList.clearSelection();
+				listk2.clear();
+
+				System.out.println("Deselect All External Brands");
+				for (String[] array : listk2) {
+					for (String s : array) {
+						System.out.print(s + " ");
+					}
+					System.out.println();
+				}
+			}
+		});
+		deselectAllButton_2.setIcon(new ImageIcon(AutoMail.class.getResource("/Testttt/1212.png")));
+		deselectAllButton_2.setHorizontalTextPosition(SwingConstants.CENTER);
+		deselectAllButton_2.setForeground(Color.WHITE);
+		deselectAllButton_2.setFont(new Font("Gisha", Font.BOLD, 13));
+		deselectAllButton_2.setBounds(10, 23, 236, 23);
+		selectExternalBrandsByGPSubPanel.add(deselectAllButton_2);
+
+		
+		selectAllButton_2 = new JButton("Select All");
+		selectAllButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				brandsByGPList.setSelectionInterval(0, internalBrandslist.getModel().getSize() - 1);
+				for (int i = 0; i < exBrands.length; i++) {
+					listk2.add(exBrands[i]);
+				}
+
+				System.out.println("Select All (Ex)");
+				for (String[] array : listk2) {
+					for (String s : array) {
+						System.out.print(s + " ");
+					}
+					System.out.println();
+				}
+			}
+		});
+		selectAllButton_2.setIcon(new ImageIcon(AutoMail.class.getResource("/Testttt/1212.png")));
+		selectAllButton_2.setForeground(Color.WHITE);
+		selectAllButton_2.setFont(new Font("Gisha", Font.BOLD, 13));
+		selectAllButton_2.setHorizontalTextPosition(SwingConstants.CENTER);
+		selectAllButton_2.setBounds(10, 49, 236, 23);
+		selectExternalBrandsByGPSubPanel.add(selectAllButton_2);
+		
+		Set<String> listk3 = new HashSet<String>();
+		DefaultListModel<String> gameprovidersName = new DefaultListModel<String>();
+		for (int i = 0; i < exBrands.length; i++) {
+			String t = exBrands[i][2];
+			String[] tokens = t.split(",");
+			for (int j = 0; j < tokens.length; j++) {
+				listk3.add(tokens[j].trim());
+			}
+		}
+
+		for (String s : listk3) {
+			gameprovidersName.addElement(s);
+		}
+		
+		brandsByGPList = new JList<String>(gameprovidersName);
+		brandsByGPList.setFont(new Font("Gisha", Font.PLAIN, 13));
+		brandsByGPList.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				listk2.clear();
+				List<String> Gp = brandsByGPList.getSelectedValuesList();
+				boolean flag = false;
+				for (int i = 0; i < exBrands.length; i++) {
+					for (int j = 0; j < Gp.size(); j++) {
+						if (exBrands[i][2].contains(Gp.get(j))) {
+							flag = true;
+						}
+					}
+					if (flag) {
+						listk2.add(exBrands[i]);
+					}
+					flag = false;
+				}
+
+				System.out.println("menuEx");
+				for (String[] array : listk2) {
+					for (String s : array) {
+						System.out.print(s + " ");
+					}
+					System.out.println();
+				}
+
+			}
+		});
+		
+		brandsByGPScrollPane = new JScrollPane();
+		brandsByGPScrollPane.setBounds(10, 77, 236, 85);
+		selectExternalBrandsByGPSubPanel.add(brandsByGPScrollPane);
+		brandsByGPScrollPane.setViewportView(brandsByGPList);
+		//
+		
+		//Panel_4
+		emailTemplatePanel = new JPanel();
+		emailTemplatePanel.setBackground(Color.BLACK);
+		emailTemplatePanel.setBorder(new TitledBorder(new LineBorder(new Color(255, 204, 153)), "Email Template:", 
+				TitledBorder.LEADING, TitledBorder.TOP, new Font("Gisha", Font.PLAIN, 13), (new Color(204, 102, 0))));
+		emailTemplatePanel.setBounds(582, 11, 766, 963);
+		mainFrame.getContentPane().add(emailTemplatePanel);
+		emailTemplatePanel.setLayout(null);
+
+		emailSubjectLabel = new JLabel("Email Subject:");
+		emailSubjectLabel.setFont(new Font("Gisha", Font.PLAIN, 12));
+		emailSubjectLabel.setForeground(Color.WHITE);
+		emailSubjectLabel.setBounds(10, 24, 139, 14);
+		emailTemplatePanel.add(emailSubjectLabel);
+		
+		emailSubjectTextField = new JTextField();
+		emailSubjectTextField.setFont(new Font("Gisha", Font.PLAIN, 13));
+		emailSubjectTextField.setBounds(157, 21, 597, 20);
+		emailTemplatePanel.add(emailSubjectTextField);
+		emailSubjectTextField.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+			}
+		});
+		emailSubjectTextField.setColumns(10);
+	
+		helloEveryoneLabel = new JLabel("Hello everyone,");
+		helloEveryoneLabel.setForeground(Color.WHITE);
+		helloEveryoneLabel.setFont(new Font("Gisha", Font.BOLD, 12));
+		helloEveryoneLabel.setBounds(10, 64, 102, 14);
+		emailTemplatePanel.add(helloEveryoneLabel);
+		
+		
+		recipientComboBox = new JComboBox(recipientNames);
+		recipientComboBox.setVisible(false);
+		recipientComboBox.setFont(new Font("Gisha", Font.PLAIN, 12));
+		recipientComboBox.setBounds(10, 62, 170, 20);
+		emailTemplatePanel.add(recipientComboBox);
+		
+		descriptiontextArea = new JTextArea();
+		descriptiontextArea.setFont(new Font("Gisha", Font.PLAIN, 13));
+		descriptiontextArea.setLineWrap(true);
+		descriptiontextArea.setWrapStyleWord(true);
+		descriptiontextArea.addFocusListener(new FocusAdapter() {
+			public void focusGained(FocusEvent e) {
+				if(incidentStartRadioButton.isSelected()) {
+					if (descriptiontextArea.getText().equals("Description..."))
+						descriptiontextArea.setText("");
+				}
+				else if(incidentUpdateRadioButton.isSelected()) {
+					if (descriptiontextArea.getText().equals("Description of update / progress:"))
+						descriptiontextArea.setText("");
+				}
+				else {
+					if (descriptiontextArea.getText().equals("Description (something is now up / working / functioning again)"))
+						descriptiontextArea.setText("");
+				}
+			}
+
+			public void focusLost(FocusEvent e) {
+				if(incidentStartRadioButton.isSelected()) {
+					if (descriptiontextArea.getText().equals(""))
+						descriptiontextArea.setText("Description...");
+				}
+				else if(incidentUpdateRadioButton.isSelected()) {
+					if (descriptiontextArea.getText().equals(""))
+						descriptiontextArea.setText("Description of update / progress:");
+				}
+				else {
+					if (descriptiontextArea.getText().equals(""))
+						descriptiontextArea.setText("Description (something is now up / working / functioning again)");
+				}
+			}
+		});
+		descriptiontextArea.setText("Description...");
+
+		descriptionScrollPane = new JScrollPane();
+		descriptionScrollPane.setBounds(10, 89, 744, 167);
+		emailTemplatePanel.add(descriptionScrollPane);
+		descriptionScrollPane.setViewportView(descriptiontextArea);
+
+		incidentStartTimelabel = new JLabel("Incident Start Time:");
+		incidentStartTimelabel.setForeground(Color.WHITE);
+		incidentStartTimelabel.setFont(new Font("Gisha", Font.BOLD, 12));
+		incidentStartTimelabel.setBounds(10, 275, 123, 14);
+		emailTemplatePanel.add(incidentStartTimelabel);
+
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+		Date date = new Date();
+		
+		dateTextField = new JTextField(dateFormat.format(date) + " (GMT +3)");
+		dateTextField.setFont(new Font("Gisha", Font.PLAIN, 13));
+		dateTextField.setBounds(191, 272, 175, 20);
+		emailTemplatePanel.add(dateTextField);
+		dateTextField.setColumns(10);
+
+		affectedCasinosLabel = new JLabel("Affected Casinos:");
+		affectedCasinosLabel.setForeground(Color.WHITE);
+		affectedCasinosLabel.setFont(new Font("Gisha", Font.BOLD, 12));
+		affectedCasinosLabel.setBounds(10, 310, 115, 14);
+		emailTemplatePanel.add(affectedCasinosLabel);
+
+		filledAutoLabel = new JLabel("[Will Be Filled Automatically according To Selected Barnds & Their Respective Email(s)]");
+		filledAutoLabel.setFont(new Font("Gisha", Font.PLAIN, 12));
+		filledAutoLabel.setForeground(Color.WHITE);
+		filledAutoLabel.setBounds(191, 310, 563, 14);
+		emailTemplatePanel.add(filledAutoLabel);
+
+		affectedSystemsCheckBox = new JCheckBox("Affected Systems:");
+		affectedSystemsCheckBox.setBackground(Color.BLACK);
+		affectedSystemsCheckBox.setForeground(Color.WHITE);
+		affectedSystemsCheckBox.setSelected(true);
+		affectedSystemsCheckBox.setFont(new Font("Gisha", Font.BOLD, 12));
+		affectedSystemsCheckBox.setBounds(10, 346, 139, 23);
+		emailTemplatePanel.add(affectedSystemsCheckBox);
+		
+		affectedSystemsTextArea = new JTextArea();
+		affectedSystemsTextArea.setFont(new Font("Gisha", Font.PLAIN, 13));
+		affectedSystemsTextArea.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				System.out.println("DSfdsfdsf");
+				if (affectedSystemsTextArea.getText().equals("For example: desktop and mobile"))
+					affectedSystemsTextArea.setText("");
+			}
+
+			@Override
+			public void focusLost(FocusEvent e) {
+				if (affectedSystemsTextArea.getText().equals(""))
+					affectedSystemsTextArea.setText("For example: desktop and mobile");
+			}
+		});
+		affectedSystemsTextArea.setText("For example: desktop and mobile");
+		affectedSystemsTextArea.setBounds(191, 356, 563, 54);
+		emailTemplatePanel.add(affectedSystemsTextArea);
+		
+		affectedSystemsScrollPane = new JScrollPane(affectedSystemsTextArea);
+		affectedSystemsScrollPane.setBounds(191, 353, 565, 57);
+		emailTemplatePanel.add(affectedSystemsScrollPane);
+		
+		timeSinceStartOfIncidentCheckBox = new JCheckBox("Time since start of incident:");
+		timeSinceStartOfIncidentCheckBox.setVisible(false);
+		timeSinceStartOfIncidentCheckBox.setBackground(Color.BLACK);
+		timeSinceStartOfIncidentCheckBox.setForeground(Color.WHITE);
+		timeSinceStartOfIncidentCheckBox.setSelected(true);
+		timeSinceStartOfIncidentCheckBox.setFont(new Font("Gisha", Font.BOLD, 12));
+		timeSinceStartOfIncidentCheckBox.setBounds(10, 346, 201, 23);
+		emailTemplatePanel.add(timeSinceStartOfIncidentCheckBox);
+		
+		timeSinceStartOfIncidentCheckBoxTextField = new JTextField();
+		timeSinceStartOfIncidentCheckBoxTextField.setVisible(false);
+		timeSinceStartOfIncidentCheckBoxTextField.setBounds(208, 348, 254, 20);
+		emailTemplatePanel.add(timeSinceStartOfIncidentCheckBoxTextField);
+		timeSinceStartOfIncidentCheckBoxTextField.setColumns(10);
+		
+		affectedFunctionalitiesCheckBox = new JCheckBox("Affected Functionalities:");
+		affectedFunctionalitiesCheckBox.setBackground(Color.BLACK);
+		affectedFunctionalitiesCheckBox.setForeground(Color.WHITE);
+		affectedFunctionalitiesCheckBox.setSelected(true);
+		affectedFunctionalitiesCheckBox.setFont(new Font("Gisha", Font.BOLD, 12));
+		affectedFunctionalitiesCheckBox.setBounds(10, 433, 170, 23);
+		emailTemplatePanel.add(affectedFunctionalitiesCheckBox);
+
+		affectedFunctionalitiesTextArea = new JTextArea();
+		affectedFunctionalitiesTextArea.setFont(new Font("Gisha", Font.PLAIN, 13));
+		affectedFunctionalitiesTextArea.setBounds(191, 432, 563, 57);
+		emailTemplatePanel.add(affectedFunctionalitiesTextArea);
+		
+		affectedFunctionalitiesScrollPane = new JScrollPane(affectedFunctionalitiesTextArea);
+		affectedFunctionalitiesScrollPane.setBounds(191, 431, 565, 57);
+		emailTemplatePanel.add(affectedFunctionalitiesScrollPane);
+		
+		actionTakenSoFarCheckBox = new JCheckBox("Action taken so far:");
+		actionTakenSoFarCheckBox.setVisible(false);
+		actionTakenSoFarCheckBox.setForeground(Color.WHITE);
+		actionTakenSoFarCheckBox.setFont(new Font("Gisha", Font.BOLD, 12));
+		actionTakenSoFarCheckBox.setBackground(Color.BLACK);
+		actionTakenSoFarCheckBox.setBounds(10, 461, 175, 23);
+		emailTemplatePanel.add(actionTakenSoFarCheckBox);
+		
+		actionTakenSoFarTextArea = new JTextArea();
+		actionTakenSoFarTextArea.setVisible(false);
+		actionTakenSoFarTextArea.setFont(new Font("Gisha", Font.PLAIN, 13));
+		actionTakenSoFarTextArea.setBounds(208, 461, 546, 54);
+		emailTemplatePanel.add(actionTakenSoFarTextArea);
+		
+		actionTakenSoFarScrollPane = new JScrollPane(actionTakenSoFarTextArea);
+		actionTakenSoFarScrollPane.setVisible(false);
+		actionTakenSoFarScrollPane.setBounds(208, 461, 546, 54);
+		emailTemplatePanel.add(actionTakenSoFarScrollPane);
+		
+		stillInvestigatingCheckBox = new JCheckBox("We are still investigating the issue.");
+		stillInvestigatingCheckBox.setVisible(false);
+		stillInvestigatingCheckBox.setForeground(Color.WHITE);
+		stillInvestigatingCheckBox.setFont(new Font("Gisha", Font.BOLD, 12));
+		stillInvestigatingCheckBox.setBackground(Color.BLACK);
+		stillInvestigatingCheckBox.setBounds(10, 530, 241, 23);
+		emailTemplatePanel.add(stillInvestigatingCheckBox);
+		
+		reasonCheckBox = new JCheckBox("Reason:");
+		reasonCheckBox.setBackground(Color.BLACK);
+		reasonCheckBox.setForeground(Color.WHITE);
+		reasonCheckBox.setFont(new Font("Gisha", Font.BOLD, 12));
+		reasonCheckBox.setBounds(10, 516, 89, 23);
+		emailTemplatePanel.add(reasonCheckBox);
+		
+		reasonTextArea = new JTextArea();
+		reasonTextArea.setFont(new Font("Gisha", Font.PLAIN, 13));
+		reasonTextArea.setBounds(191, 515, 565, 57);
+		emailTemplatePanel.add(reasonTextArea);
+		
+		reasonScrollPane = new JScrollPane(reasonTextArea);
+		reasonScrollPane.setBounds(191, 515, 565, 57);
+		emailTemplatePanel.add(reasonScrollPane);
+		
+		ETACheckBox = new JCheckBox("ETA:");
+		ETACheckBox.setBackground(Color.BLACK);
+		ETACheckBox.setForeground(Color.WHITE);
+		ETACheckBox.setSelected(true);
+		ETACheckBox.setFont(new Font("Gisha", Font.BOLD, 12));
+		ETACheckBox.setBounds(10, 595, 63, 23);
+		emailTemplatePanel.add(ETACheckBox);
+
+		ETARadioButton = new JRadioButton("Unfortuately we don't have an ETA at the moment.");
+		ETARadioButton.setFont(new Font("Gisha", Font.PLAIN, 12));
+		ETARadioButton.setBackground(Color.BLACK);
+		ETARadioButton.setForeground(Color.WHITE);
+		ETARadioButton.setBounds(191, 595, 390, 23);
+		emailTemplatePanel.add(ETARadioButton);
+		
+		ETARadioButton_2 = new JRadioButton("Unfortuately, we cannot provide it yet.");
+		ETARadioButton_2.setFont(new Font("Gisha", Font.PLAIN, 12));
+		ETARadioButton_2.setBackground(Color.BLACK);
+		ETARadioButton_2.setForeground(Color.WHITE);
+		ETARadioButton_2.setSelected(true);
+		ETARadioButton_2.setBounds(191, 621, 390, 23);
+		emailTemplatePanel.add(ETARadioButton_2);
+
+		ETARadioButton_3 = new JRadioButton("Custom:");
+		ETARadioButton_3.setFont(new Font("Gisha", Font.PLAIN, 12));
+		ETARadioButton_3.setBackground(Color.BLACK);
+		ETARadioButton_3.setForeground(Color.WHITE);
+		ETARadioButton_3.setBounds(191, 647, 75, 23);
+		emailTemplatePanel.add(ETARadioButton_3);
+		
+		ETATextField = new JTextField();
+		ETATextField.setFont(new Font("Gisha", Font.PLAIN, 13));
+		ETATextField.setBounds(272, 651, 482, 20);
+		emailTemplatePanel.add(ETATextField);
+		ETATextField.setColumns(10);
+		
+		buttonGroup_5 = new ButtonGroup();
+		buttonGroup_5.add(ETARadioButton);
+		buttonGroup_5.add(ETARadioButton_2);
+		buttonGroup_5.add(ETARadioButton_3);
+
+		summationCheckBox = new JCheckBox("Summation:");
+		summationCheckBox.setFont(new Font("Gisha", Font.PLAIN, 12));
+		summationCheckBox.setForeground(Color.WHITE);
+		summationCheckBox.setBackground(Color.BLACK);
+		summationCheckBox.setSelected(true);
+		summationCheckBox.setBounds(10, 705, 97, 23);
+		emailTemplatePanel.add(summationCheckBox);
+		
+		summationRadioButton = new JRadioButton("We are currently working on a solution and an update will be sent as soon as it will be fixed.");
+		summationRadioButton.setFont(new Font("Gisha", Font.PLAIN, 12));
+		summationRadioButton.setBackground(Color.BLACK);
+		summationRadioButton.setForeground(Color.WHITE);
+		summationRadioButton.setSelected(true);
+		summationRadioButton.setBounds(191, 705, 563, 23);
+		emailTemplatePanel.add(summationRadioButton);
+		
+		summationRadioButton_2 = new JRadioButton("We are working to fix this issue soon as possible.");
+		summationRadioButton_2.setFont(new Font("Gisha", Font.PLAIN, 12));
+		summationRadioButton_2.setBackground(Color.BLACK);
+		summationRadioButton_2.setForeground(Color.WHITE);
+		summationRadioButton_2.setBounds(191, 731, 471, 23);
+		emailTemplatePanel.add(summationRadioButton_2);
+
+		summationRadioButton_3 = new JRadioButton("An update mail will be send containing additional information.");
+		summationRadioButton_3.setFont(new Font("Gisha", Font.PLAIN, 12));
+		summationRadioButton_3.setBackground(Color.BLACK);
+		summationRadioButton_3.setForeground(Color.WHITE);
+		summationRadioButton_3.setBounds(191, 759, 471, 23);
+		emailTemplatePanel.add(summationRadioButton_3);
+
+		summationRadioButton_4 = new JRadioButton("Custom:");
+		summationRadioButton_4.setFont(new Font("Gisha", Font.PLAIN, 12));
+		summationRadioButton_4.setBackground(Color.BLACK);
+		summationRadioButton_4.setForeground(Color.WHITE);
+		summationRadioButton_4.setBounds(191, 785, 75, 23);
+		emailTemplatePanel.add(summationRadioButton_4);
+		
+		summationTextField = new JTextField();
+		summationTextField.setFont(new Font("Gisha", Font.PLAIN, 13));
+		summationTextField.setBounds(268, 789, 486, 20);
+		emailTemplatePanel.add(summationTextField);
+		summationTextField.setColumns(10);
+		
+		buttonGroup_6 = new ButtonGroup();
+		buttonGroup_6.add(summationRadioButton);
+		buttonGroup_6.add(summationRadioButton_2);
+		buttonGroup_6.add(summationRadioButton_3);
+		buttonGroup_6.add(summationRadioButton_4);
+
+		workingStatusCheckBox = new JCheckBox("Working status:");
+		workingStatusCheckBox.setVisible(false);
+		workingStatusCheckBox.setFont(new Font("Gisha", Font.PLAIN, 12));
+		workingStatusCheckBox.setForeground(Color.WHITE);
+		workingStatusCheckBox.setBackground(Color.BLACK);
+		workingStatusCheckBox.setSelected(true);
+		workingStatusCheckBox.setBounds(10, 680, 125, 23);
+		emailTemplatePanel.add(workingStatusCheckBox);
+		
+		workingStatusRadioButton = new JRadioButton("We are currently working on a solution and an update will be sent as soon as it will be fixed.");
+		workingStatusRadioButton.setVisible(false);
+		workingStatusRadioButton.setFont(new Font("Gisha", Font.PLAIN, 12));
+		workingStatusRadioButton.setBackground(Color.BLACK);
+		workingStatusRadioButton.setForeground(Color.WHITE);
+		workingStatusRadioButton.setSelected(true);
+		workingStatusRadioButton.setBounds(191, 680, 563, 23);
+		emailTemplatePanel.add(workingStatusRadioButton);
+		
+		workingStatusRadioButton_2 = new JRadioButton("We are working to fix this issue soon as possible.");
+		workingStatusRadioButton_2.setVisible(false);
+		workingStatusRadioButton_2.setFont(new Font("Gisha", Font.PLAIN, 12));
+		workingStatusRadioButton_2.setBackground(Color.BLACK);
+		workingStatusRadioButton_2.setForeground(Color.WHITE);
+		workingStatusRadioButton_2.setBounds(191, 706, 471, 23);
+		emailTemplatePanel.add(workingStatusRadioButton_2);
+		
+		workingStatusRadioButton_3 = new JRadioButton("Custom:");
+		workingStatusRadioButton_3.setVisible(false);
+		workingStatusRadioButton_3.setFont(new Font("Gisha", Font.PLAIN, 12));
+		workingStatusRadioButton_3.setBackground(Color.BLACK);
+		workingStatusRadioButton_3.setForeground(Color.WHITE);
+		workingStatusRadioButton_3.setBounds(191, 732, 75, 23);
+		emailTemplatePanel.add(workingStatusRadioButton_3);
+		
+		workingStatusTextField = new JTextField();
+		workingStatusTextField.setVisible(false);
+		workingStatusTextField.setFont(new Font("Gisha", Font.PLAIN, 13));
+		workingStatusTextField.setBounds(268, 732, 486, 20);
+		emailTemplatePanel.add(workingStatusTextField);
+		summationTextField.setColumns(10);
+		
+		buttonGroup_7 = new ButtonGroup();
+		buttonGroup_7.add(workingStatusRadioButton);
+		buttonGroup_7.add(workingStatusRadioButton_2);
+		buttonGroup_7.add(workingStatusRadioButton_3);
+	
+
+		thanksCheckBox = new JCheckBox("Thanks:");
+		thanksCheckBox.setFont(new Font("Gisha", Font.PLAIN, 12));
+		thanksCheckBox.setForeground(Color.WHITE);
+		thanksCheckBox.setBackground(Color.BLACK);
+		thanksCheckBox.setBounds(10, 842, 97, 23);
+		emailTemplatePanel.add(thanksCheckBox);
+		
+		thanksRadioButton = new JRadioButton("Thank you for your patience.");
+		thanksRadioButton.setFont(new Font("Gisha", Font.PLAIN, 12));
+		thanksRadioButton.setBackground(Color.BLACK);
+		thanksRadioButton.setForeground(Color.WHITE);
+		thanksRadioButton.setSelected(true);
+		thanksRadioButton.setBounds(191, 842, 271, 23);
+		emailTemplatePanel.add(thanksRadioButton);
+		
+		thanksRadioButton_2 = new JRadioButton("We apologize for any incovenience and appreciate your understanding.");
+		thanksRadioButton_2.setFont(new Font("Gisha", Font.PLAIN, 12));
+		thanksRadioButton_2.setBackground(Color.BLACK);
+		thanksRadioButton_2.setForeground(Color.WHITE);
+		thanksRadioButton_2.setBounds(191, 868, 471, 23);
+		emailTemplatePanel.add(thanksRadioButton_2);
+		
+		thanksRadioButton_3 = new JRadioButton("Custom:");
+		thanksRadioButton_3.setFont(new Font("Gisha", Font.PLAIN, 12));
+		thanksRadioButton_3.setBackground(Color.BLACK);
+		thanksRadioButton_3.setForeground(Color.WHITE);
+		thanksRadioButton_3.setBounds(191, 894, 75, 23);
+		emailTemplatePanel.add(thanksRadioButton_3);
+		
+		thanksTextField = new JTextField();
+		thanksTextField.setColumns(10);
+		thanksTextField.setBounds(268, 895, 486, 20);
+		emailTemplatePanel.add(thanksTextField);
+		
+		buttonGroup_8 = new ButtonGroup();
+		buttonGroup_8.add(thanksRadioButton);
+		buttonGroup_8.add(thanksRadioButton_2);
+		buttonGroup_8.add(thanksRadioButton_3);
+		
+		bestRegardsLabel = new JLabel("Best Regards, ");
+		bestRegardsLabel.setForeground(Color.WHITE);
+		bestRegardsLabel.setFont(new Font("Gisha", Font.BOLD, 12));
+		bestRegardsLabel.setBounds(10, 930, 81, 26);
+		emailTemplatePanel.add(bestRegardsLabel);
+		
+		bestRegardsComboBox = new JComboBox(NAMES);
+		bestRegardsComboBox.setFont(new Font("Gisha", Font.PLAIN, 12));
+		bestRegardsComboBox.setBounds(98, 934, 139, 20);
+		emailTemplatePanel.add(bestRegardsComboBox);
+
+		skeletonImageLabel = new JLabel("");
+		skeletonImageLabel.setBounds(-91, 476, 436, 533);
+		mainFrame.getContentPane().add(skeletonImageLabel);
+		skeletonImageLabel.setIcon(new ImageIcon(AutoMail.class.getResource("/Testttt/pngguru.com (6).png")));
+		
+		//Why??
+		listk.add(brands[0]);
+	}
+
+	public void incidentMailStart() {
+
+		String user = bestRegardsComboBox.getSelectedItem().toString();
+
+		if (user.equals(NAMES[0]))
+			s.setUserAndPassword(USER_NAMES[0], PASSWORDS[0]);
+		else if (user.equals(NAMES[1]))
+			s.setUserAndPassword(USER_NAMES[1], PASSWORDS[1]);
+		else if (user.equals(NAMES[2]))
+			s.setUserAndPassword(USER_NAMES[2], PASSWORDS[2]);
+		else if (user.equals(NAMES[3]))
+			s.setUserAndPassword(USER_NAMES[3], PASSWORDS[3]);
+		else if (user.equals(NAMES[4]))
+			s.setUserAndPassword(USER_NAMES[4], PASSWORDS[4]);
+		else if (user.equals(NAMES[5]))
+			s.setUserAndPassword(USER_NAMES[5], PASSWORDS[5]);
+		else if (user.equals(NAMES[6]))
+			s.setUserAndPassword(USER_NAMES[6], PASSWORDS[6]);
+		else if (user.equals(NAMES[7]))
+			s.setUserAndPassword(USER_NAMES[7], PASSWORDS[7]);
+
+		String bodyMessageTemp = body.replaceAll("\n", "<br />");
+		System.out.println(bodyMessageTemp);
+		s.sendFromGMail(s.to, s.cc, s.bcc, subject, bodyMessageTemp);
+		System.out.println("Email Sent....!");
+	}
+
+	public void updateSubjectAndBody() {
+		if(incidentStartRadioButton.isSelected()) {
+			subject = emailSubjectTextField.getText();
+			body = helloEveryoneLabel.getText() + "<br /><br />" + descriptiontextArea.getText() + "<br />";
+			body = body + "<br />" + incidentStartTimelabel.getText() + " " + dateTextField.getText() + "<br />" + affectedCasinosLabel.getText();
+
+			if (allRadioButton.isSelected()) {
+				tamp = "All";
+			}
+
+			body = body + " " + tamp;
+			if (affectedSystemsCheckBox.isSelected())
+				body = body + "<br />" + affectedSystemsCheckBox.getText() + " " + affectedSystemsTextArea.getText();
+			if (affectedFunctionalitiesCheckBox.isSelected())
+				body = body + "<br />" + affectedFunctionalitiesCheckBox.getText() + " " + affectedFunctionalitiesTextArea.getText();
+			if (reasonCheckBox.isSelected()) {
+				body = body + "<br />" + reasonCheckBox.getText() + " " + reasonTextArea.getText();
+			}
+			if (ETACheckBox.isSelected()) {
+				if (ETARadioButton.isSelected()) {
+					body = body + "<br />" + ETACheckBox.getText() + " " + ETARadioButton.getText();
+				} else if (ETARadioButton_2.isSelected()) {
+					body = body + "<br />" + ETACheckBox.getText() + " " + ETARadioButton_2.getText();
+				} else {
+					body = body + "<br />" + ETACheckBox.getText() + " " + ETATextField.getText();
+				}
+			}
+
+			if (summationCheckBox.isSelected()) {
+				if (summationRadioButton.isSelected()) {
+					body = body + "<br />" + summationRadioButton.getText();
+				} else if (summationRadioButton_2.isSelected()) {
+					body = body + "<br />" + summationRadioButton_2.getText();
+				} else if (summationRadioButton_3.isSelected()) {
+					body = body + "<br />" + summationRadioButton_3.getText();
+				} else {
+					body = body + "<br />" + summationTextField.getText();
+				}
+			}
+
+			if (thanksCheckBox.isSelected()) {
+				if (thanksRadioButton.isSelected()) {
+					body = body + "<br />" + thanksRadioButton.getText();
+				} else if (thanksRadioButton_2.isSelected()) {
+					body = body + "<br />" + thanksRadioButton_2.getText();
+				} else {
+					body = body + "<br />" + thanksTextField.getText();
+				}
+			}
+
+			body = body + "<br /><br />" + bestRegardsLabel.getText() + "<br />" + bestRegardsComboBox.getSelectedItem().toString();
+		}
+		else if(incidentUpdateRadioButton.isSelected()) {
+			subject = emailSubjectTextField.getText();
+			body = helloEveryoneLabel.getText() + "<br /><br />" + descriptiontextArea.getText() + "<br />";
+			body = body + "<br />" + incidentStartTimelabel.getText() + " " + dateTextField.getText() + "<br />" + affectedCasinosLabel.getText();
+
+			if (allRadioButton.isSelected()) {
+				tamp = "All";
+			}
+
+			body = body + " " + tamp;
+			if (timeSinceStartOfIncidentCheckBox.isSelected()) {
+				body = body + "<br />" + timeSinceStartOfIncidentCheckBox.getText() + " " + timeSinceStartOfIncidentCheckBoxTextField.getText();
+			}
+			if (reasonCheckBox.isSelected()) {
+				body = body + "<br />" + reasonCheckBox.getText() + " " + reasonTextArea.getText();
+			}
+			if (actionTakenSoFarCheckBox.isSelected())
+				body = body + "<br />" + actionTakenSoFarCheckBox.getText() + " " + actionTakenSoFarTextArea.getText();
+			if (stillInvestigatingCheckBox.isSelected()) {
+				body = body + "<br />" + stillInvestigatingCheckBox.getText();
+			}
+			if (ETACheckBox.isSelected()) {
+				if (ETARadioButton.isSelected()) {
+					body = body + "<br />" + ETACheckBox.getText() + " " + ETARadioButton.getText();
+				} else if (ETARadioButton_2.isSelected()) {
+					body = body + "<br />" + ETACheckBox.getText() + " " + ETARadioButton_2.getText();
+				} else {
+					body = body + "<br />" + ETACheckBox.getText() + " " + ETATextField.getText();
+				}
+			}
+
+			if (workingStatusCheckBox.isSelected()) {
+				if (workingStatusRadioButton.isSelected()) {
+					body = body + "<br />" + workingStatusRadioButton.getText();
+				} else if (workingStatusRadioButton_2.isSelected()) {
+					body = body + "<br />" + workingStatusRadioButton_2.getText();
+				} else {
+					body = body + "<br />" + workingStatusTextField.getText();
+				}
+			}
+
+			if (thanksCheckBox.isSelected()) {
+				if (thanksRadioButton.isSelected()) {
+					body = body + "<br />" + thanksRadioButton.getText();
+				} else if (thanksRadioButton_2.isSelected()) {
+					body = body + "<br />" + thanksRadioButton_2.getText();
+				} else {
+					body = body + "<br />" + thanksTextField.getText();
+				}
+			}
+
+			body = body + "<br /><br />" + bestRegardsLabel.getText() + "<br />" + bestRegardsComboBox.getSelectedItem().toString();
+		}
+		else {
+			
+		}
+	}
+
+	public void createFrame() {
+
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				mainFrame.setEnabled(false);
+
+				String[] namesbrand = new String[listk.size() + listk2.size()];
+				int kk = 0;
+				for (String[] array : listk) {
+					namesbrand[kk] = array[0];
+					s.bcc.add(array[1]);
+					kk++;
+				}
+
+				for (String[] array : listk2) {
+					namesbrand[kk] = array[0];
+					s.bcc.add(array[1]);
+					kk++;
+				}
+
+				Set<String> set = new HashSet<>(s.bcc);
+
+				s.bcc.clear();
+				s.bcc.addAll(set);
+
+				if (listk.size() + listk2.size() > 0) {
+					end = s.bcc.size();
+					String tname = s.bcc.get(0);
+					tamp = "";
+					for (String[] array : listk) {
+						if (array[1] == tname) {
+							tamp = tamp + array[0] + ", ";
+						}
+
+					}
+					if (tamp == "") {
+						tamp = "All";
+					} else {
+						tamp = tamp.substring(0, tamp.length() - 2);
+					}
+				}
+				updateSubjectAndBody();
+				JFrame frame2 = new JFrame();
+
+				frame2.addWindowListener(new WindowAdapter() {
+					public void windowClosing(WindowEvent e) {
+						s.bcc.clear();
+						s.to.clear();
+						temp = "";
+						start = 1;
+						lblOutOf.setText(start.toString() + " / " + end);
+						startindex = 0;
+						mainFrame.setEnabled(true);
+
+					}
+
+				});
+				frame2.getContentPane().setBackground(Color.BLACK);
+				frame2.setBounds(100, 100, 809, 596);
+				frame2.setLocationRelativeTo(mainFrame);
+				frame2.getContentPane().setLayout(null);
+				frame2.setVisible(true);
+				frame2.setResizable(false);
+
+				try {
+					frame2.setIconImage(ImageIO.read(getClass().getResourceAsStream("/Testttt/1xx.png")));
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+
+				JLabel lable = new JLabel("Email To:");
+				lable.setBounds(10, 56, 78, 14);
+				frame2.getContentPane().add(lable);
+
+				JLabel label_1 = new JLabel("Email BCC:");
+				label_1.setBounds(10, 93, 78, 14);
+				frame2.getContentPane().add(label_1);
+
+				JLabel label_2 = new JLabel("Subject:");
+				label_2.setBounds(10, 176, 58, 14);
+				frame2.getContentPane().add(label_2);
+
+				JLabel label_3 = new JLabel("Body:");
+				label_3.setBounds(10, 201, 46, 14);
+				frame2.getContentPane().add(label_3);
+
+				JTextField textField_5 = new JTextField();
+				textField_5.setEditable(false);
+
+				String user = bestRegardsComboBox.getSelectedItem().toString();
+				if (user.equals(NAMES[0]))
+					s.to.add(USER_NAMES[0]);
+				else if (user.equals(NAMES[1]))
+					s.to.add(USER_NAMES[1]);
+				else if (user.equals(NAMES[2]))
+					s.to.add(USER_NAMES[2]);
+				else if (user.equals(NAMES[3]))
+					s.to.add(USER_NAMES[3]);
+				else if (user.equals(NAMES[4]))
+					s.to.add(USER_NAMES[4]);
+				else if (user.equals(NAMES[5]))
+					s.to.add(USER_NAMES[5]);
+				else if (user.equals(NAMES[6]))
+					s.to.add(USER_NAMES[6]);
+				else if (user.equals(NAMES[7]))
+					s.to.add(USER_NAMES[7]);
+				temp = s.to.get(0);
+				for (int i = 1; i < s.to.size(); i++) {
+					temp = temp + ", " + s.to.get(i);
+				}
+				textField_5.setText(temp);
+				textField_5.setBounds(95, 56, 605, 20);
+				frame2.getContentPane().add(textField_5);
+				textField_5.setColumns(10);
+
+				JTextArea textArea_4 = new JTextArea();
+				textArea_4.setLineWrap(true);
+				textArea_4.setWrapStyleWord(true);
+				temp = s.bcc.get(0);
+				for (int i = 1; i < s.bcc.size() && s.bcc.size() != 1; i++) {
+					temp = temp + ", " + s.bcc.get(i);
+				}
+				textArea_4.setText(temp);
+				textArea_4.setEditable(false);
+
+				scrollPane_5 = new JScrollPane(textArea_4);
+				scrollPane_5.setBounds(95, 88, 605, 74);
+				frame2.getContentPane().add(scrollPane_5);
+
+				JTextField textField_1 = new JTextField();
+				textField_1.setText(emailSubjectTextField.getText());
+				textField_1.setEditable(false);
+				textField_1.setBounds(91, 176, 612, 20);
+				frame2.getContentPane().add(textField_1);
+				textField_1.setColumns(10);
+
+				String temp1 = body.replaceAll("<br />", "\n");
+				textArea_5 = new JTextArea();
+				textArea_5.setLineWrap(true);
+				textArea_5.setWrapStyleWord(true);
+				textArea_5.setText(temp1);
+				textArea_5.setEditable(false);
+
+				scrollPane_6 = new JScrollPane(textArea_5);
+				scrollPane_6.setBounds(95, 213, 605, 305);
+				frame2.getContentPane().add(scrollPane_6);
+
+				JButton btn = new JButton("Copy");
+				btn.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						StringSelection stringSelection = new StringSelection(textField_5.getText());
+						Clipboard clpbrd = Toolkit.getDefaultToolkit().getSystemClipboard();
+						clpbrd.setContents(stringSelection, null);
+					}
+				});
+				btn.setBounds(710, 52, 71, 23);
+				frame2.getContentPane().add(btn);
+
+				JButton btn_1 = new JButton("Copy");
+				btn_1.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						StringSelection stringSelection = new StringSelection(textArea_4.getText());
+						Clipboard clpbrd = Toolkit.getDefaultToolkit().getSystemClipboard();
+						clpbrd.setContents(stringSelection, null);
+					}
+				});
+				btn_1.setBounds(710, 88, 71, 74);
+				frame2.getContentPane().add(btn_1);
+
+				JButton btn_2 = new JButton("Copy");
+				btn_2.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						StringSelection stringSelection = new StringSelection(textField_1.getText());
+						Clipboard clpbrd = Toolkit.getDefaultToolkit().getSystemClipboard();
+						clpbrd.setContents(stringSelection, null);
+					}
+				});
+				btn_2.setBounds(710, 176, 71, 23);
+				frame2.getContentPane().add(btn_2);
+
+				JButton btn_3 = new JButton("Copy");
+				btn_3.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						StringSelection stringSelection = new StringSelection(textArea_5.getText());
+						Clipboard clpbrd = Toolkit.getDefaultToolkit().getSystemClipboard();
+						clpbrd.setContents(stringSelection, null);
+					}
+				});
+				btn_3.setBounds(710, 213, 71, 305);
+				frame2.getContentPane().add(btn_3);
+
+				btn_44 = new JButton("<    Previous");
+				btn_44.setEnabled(false);
+				btn_44.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+
+						if (start > 1) {
+							startindex--;
+							String tname = s.bcc.get(startindex);
+							if (listk.contains(tname)) {
+								System.out.println("yes");
+							}
+							tamp = "";
+							for (String[] array : listk) {
+								if (array[1] == tname) {
+									tamp = tamp + array[0] + ", ";
+								}
+
+							}
+							if (tamp == "") {
+								tamp = "All";
+							} else {
+								tamp = tamp.substring(0, tamp.length() - 2);
+							}
+							updateSubjectAndBody();
+							textArea_5.setText(body.replaceAll("<br />", "\n"));
+
+							btn_55.setEnabled(true);
+
+							start--;
+
+							lblOutOf.setText(start.toString() + " / " + end);
+						}
+
+						if (start == 1) {
+							btn_44.setEnabled(false);
+						} else if (start == end) {
+							btn_55.setEnabled(false);
+						}
+
+					}
+				});
+				btn_44.setFont(new Font("Tahoma", Font.BOLD, 13));
+				btn_44.setBounds(163, 11, 130, 34);
+				frame2.getContentPane().add(btn_44);
+
+				btn_55 = new JButton("Next    >");
+				if (end == start)
+					btn_55.setEnabled(false);
+				btn_55.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						if (start < end) {
+							startindex++;
+							String tname = s.bcc.get(startindex);
+							tamp = "";
+							for (String[] array : listk) {
+								if (array[1] == tname) {
+									tamp = tamp + array[0] + ", ";
+								}
+
+							}
+							if (tamp == "") {
+								tamp = "All";
+							} else {
+								tamp = tamp.substring(0, tamp.length() - 2);
+							}
+							updateSubjectAndBody();
+							textArea_5.setText(body.replaceAll("<br />", "\n"));
+							btn_44.setEnabled(true);
+							start++;
+							lblOutOf.setText(start.toString() + " / " + end);
+						}
+
+						if (start == 1) {
+							btn_44.setEnabled(false);
+						} else if (start == end) {
+							btn_55.setEnabled(false);
+						}
+
+					}
+				});
+				btn_55.setFont(new Font("Tahoma", Font.BOLD, 13));
+				btn_55.setBounds(473, 11, 130, 34);
+				frame2.getContentPane().add(btn_55);
+
+				JButton btn_6 = new JButton("Send All E-Mails");
+				btn_6.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						if (addRecipientcheckBox_1.isSelected()) {
+							s.cc.add("yoniamikam1@gmail.com");
+						} else {
+							s.cc.clear();
+							System.out.println("0000000000000000000");
+						}
+
+						if (addRecipientcheckBox_2.isSelected()) {
+							s.bcc.add("yoniamikam1234@gmail.com");
+						} else {
+							s.bcc.remove("yoniamikam1234@gmail.com");
+							System.out.println("sdfsdfdsfdsfdsf");
+						}
+						incidentMailStart();
+					}
+				});
+				btn_6.setFont(new Font("Tahoma", Font.BOLD, 11));
+				btn_6.setBounds(95, 529, 605, 23);
+				frame2.getContentPane().add(btn_6);
+
+				lblOutOf = new JLabel(start.toString() + " / " + end);
+				lblOutOf.setFont(new Font("Tahoma", Font.BOLD, 13));
+				lblOutOf.setHorizontalAlignment(SwingConstants.CENTER);
+				lblOutOf.setBounds(303, 21, 160, 14);
+				frame2.getContentPane().add(lblOutOf);
+			}
+		});
+	}
+}
+
