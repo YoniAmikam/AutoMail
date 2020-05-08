@@ -1,0 +1,55 @@
+package Testttt;
+
+import java.io.File;  
+import java.io.FileInputStream;
+import java.io.IOException;
+import org.apache.poi.ss.usermodel.Cell;  
+import org.apache.poi.ss.usermodel.FormulaEvaluator;  
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;  
+
+public class ReadExcelFile {  
+
+	private XSSFWorkbook wb;
+	
+	@SuppressWarnings("deprecation")
+	public String[][] yoni (String patch) throws IOException {
+		try (FileInputStream file = new FileInputStream(new File(patch))) {
+			wb = new XSSFWorkbook(file);   
+			//creating a Sheet object to retrieve the object  
+			XSSFSheet sheet=wb.getSheetAt(0);  
+			//evaluating cell type   
+			FormulaEvaluator formulaEvaluator=wb.getCreationHelper().createFormulaEvaluator();  
+
+			int totalRows = sheet.getPhysicalNumberOfRows() - 1;
+			int totalColumns = sheet.getRow(0).getLastCellNum();
+			String[][] brands = new String[totalRows][totalColumns];
+		
+			for(Row row: sheet) {  
+				if(row.getRowNum() == 0) {
+					continue;
+				}
+				for(Cell cell: row) {  
+					switch(formulaEvaluator.evaluateInCell(cell).getCellType())  
+					{  
+					case Cell.CELL_TYPE_NUMERIC:   //field that represents numeric cell type  
+						Integer s = (int) cell.getNumericCellValue();	
+						brands[row.getRowNum() - 1][cell.getColumnIndex()] = s.toString(); 
+
+					break;  
+					case Cell.CELL_TYPE_STRING:    //field that represents string cell type  
+					//getting the value of the cell as a string  
+						brands[row.getRowNum() - 1][cell.getColumnIndex()] = cell.getStringCellValue();
+					break;  
+					}	
+				}
+			}
+			
+			return brands;
+		}
+	}
+}
+
+
+  
